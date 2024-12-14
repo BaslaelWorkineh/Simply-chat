@@ -22,10 +22,10 @@
 
 <script setup>
 import { ref, onMounted } from 'vue';
-import { io } from 'socket.io-client';
+import { useNuxtApp } from '#app';
 
-// Connect to the signaling server
-const socket = io('http://localhost:3001');
+// Get the Socket.IO instance from the plugin
+const { $socket } = useNuxtApp();
 
 // State variables
 const roomId = ref(null);
@@ -55,13 +55,13 @@ const setVideoRef = (id) => (el) => {
 const joinRoom = (room) => {
   roomId.value = room;
   isHost.value = false;
-  socket.emit('join-room', room);
+  $socket.emit('join-room', room);
 
-  socket.on('user-joined', (userId) => {
+  $socket.on('user-joined', (userId) => {
     console.log('User joined: ' + userId);
   });
 
-  socket.on('signal', ({ senderId, signalData }) => {
+  $socket.on('signal', ({ senderId, signalData }) => {
     // Handle signaling logic here (similar to the backend's signaling process)
     // You'll need WebRTC-related code for establishing the peer connection.
     console.log(senderId, signalData);
@@ -74,13 +74,13 @@ const joinRoom = (room) => {
 const hostRoom = () => {
   roomId.value = Math.random().toString(36).substring(2, 9); // Generate random room ID
   isHost.value = true;
-  socket.emit('join-room', roomId.value);
+  $socket.emit('join-room', roomId.value);
   getUserMediaStream();
 };
 
 // Handle user leaving the room
 const leaveRoom = () => {
-  socket.emit('leave-room', roomId.value);
+  $socket.emit('leave-room', roomId.value);
   roomId.value = null;
   isHost.value = false;
 };
@@ -92,7 +92,7 @@ const createPeer = (userID, stream) => {
 
 onMounted(() => {
   // Join room when component mounts
-  socket.on('signal', ({ senderId, signalData }) => {
+  $socket.on('signal', ({ senderId, signalData }) => {
     console.log('Signal received:', senderId, signalData);
   });
 });
