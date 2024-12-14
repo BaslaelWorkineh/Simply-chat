@@ -23,33 +23,36 @@
   // Get socket from Nuxt context
   const { $socket } = useNuxtApp();
   
-  // Set a static room ID for testing
-  const roomId = ref('1234'); // Set to '1234' for testing
+  // Accept roomId as a prop
+  const props = defineProps({
+    roomId: String
+  });
+  
   const messages = ref([]); // Store chat messages
   const messageText = ref(''); // Input field for new message
   
   // Create a ref for messages container to use it in scrollToBottom
-  const messagesContainer = ref(null); // Replace $refs with `ref`
+  const messagesContainer = ref(null);
   
   // Check if $socket is initialized and safe to use
   onMounted(() => {
-    if ($socket) {
+    if ($socket && props.roomId) {
       // Join the room when the component is mounted
-      $socket.emit('join-room', roomId.value);
-      
+      $socket.emit('join-room', props.roomId);
+      console.log("room id from chat", props.roomId);
       // Listen for new messages on socket
       $socket.on('receive-message', (message) => {
         messages.value.push(message);
         scrollToBottom();
       });
     } else {
-      console.error("Socket is not initialized!");
+      console.error('Socket is not initialized or roomId is not available!');
     }
   });
   
   // Send message to the server
   const sendMessage = () => {
-    if (!roomId.value) {
+    if (!props.roomId) {
       console.error('Room ID is not defined');
       return;
     }
@@ -58,7 +61,7 @@
       const message = {
         user: $socket.id, // Assuming user id is stored in socket
         text: messageText.value,
-        roomId: roomId.value, // Include roomId to ensure the message is sent to the right room
+        roomId: props.roomId, // Include roomId to ensure the message is sent to the right room
       };
       $socket.emit('send-message', message); // Emit to the server
       messages.value.push(message); // Add to local chat
@@ -128,3 +131,4 @@
     background-color: #218838;
   }
   </style>
+  

@@ -6,7 +6,7 @@
         :height="height"
         class="canvas"
       ></canvas>
-  
+    
       <div class="controls">
         <button @click="clearCanvas">Clear</button>
         <input type="color" v-model="color" @change="changeColor" />
@@ -15,8 +15,16 @@
   </template>
   
   <script setup>
-  import { ref, onMounted } from 'vue';
+  import { ref, onMounted, defineProps } from 'vue';
   import { useNuxtApp } from '#app';
+  
+  // Pass the roomId from the parent component
+  const props = defineProps({
+    roomId: {
+      type: String,
+      required: true
+    }
+  });
   
   const { $socket } = useNuxtApp();
   
@@ -29,7 +37,6 @@
   const lastX = ref(0);
   const lastY = ref(0);
   const color = ref("#000000");
-  const roomId = ref("1234"); // Your room ID for collaboration
   
   onMounted(() => {
     const canvas = canvasRef.value;
@@ -47,7 +54,7 @@
   
     // Join room and listen for other drawings
     if ($socket) {
-      $socket.emit("join-room", roomId.value);
+      $socket.emit("join-room", props.roomId);
   
       $socket.on("receive-drawing-data", (data) => {
         drawOnCanvas(data);
@@ -86,10 +93,10 @@
     lastY.value = y;
   
     const data = {
-      roomId: roomId.value,
+      roomId: props.roomId,
       x,
       y,
-      color: color.value,
+      color: color.value
     };
     $socket.emit("send-drawing-data", data);
   };
@@ -115,7 +122,7 @@
     if (canvas && ctx) {
       ctx.clearRect(0, 0, width, height);
     }
-    $socket.emit("clear-canvas", roomId.value);
+    $socket.emit("clear-canvas", props.roomId);
   };
   
   // Draw received data on the canvas
