@@ -13,7 +13,7 @@
       <div class="max-w-4xl">
         <div class="glitch-wrapper mb-2">
           <h1 class="text-7xl font-bold mb-6 font-space tracking-wider bg-clip-text text-transparent bg-gradient-to-r from-[#FF3366] to-[#FF00FF]">
-            MEET<span class="text-[#00FFFF]">SYNC</span>
+            SIMPLY<span class="text-[#00FFFF]">CHAT</span>
           </h1>
         </div>
         
@@ -148,7 +148,7 @@ const joinMeeting = () => {
 
 .glitch-wrapper::before,
 .glitch-wrapper::after {
-  content: "MEETSYNC";
+  content: "SIMPLYCHAT";
   position: absolute;
   top: 0;
   left: 0;
@@ -169,7 +169,7 @@ const joinMeeting = () => {
 .glitch-wrapper::after {
   left: -2px;
   text-shadow: -2px 0 #00FFFF;
-  animation: glitch 2s infinite linear alternate-reverse;
+  animation: glitch 3s infinite linear alternate-reverse;
 }
 
 @keyframes glitch {
@@ -191,5 +191,51 @@ const joinMeeting = () => {
 .modal-leave-to {
   opacity: 0;
   transform: scale(0.95);
+}
+
+/* Media Queries for Responsiveness */
+@media (max-width: 768px) {
+  .text-7xl {
+    font-size: 3rem; /* Reduce heading size */
+  }
+
+  .text-xl {
+    font-size: 1rem; /* Reduce paragraph size */
+  }
+
+  .flex {
+    flex-direction: column; /* Stack buttons vertically */
+  }
+
+  .gap-6 {
+    gap: 1rem; /* Reduce spacing between buttons */
+  }
+
+  .join-button, .host-button {
+    width: 100%; /* Buttons occupy full width */
+    padding: 1rem;
+  }
+
+  .max-w-md {
+    width: calc(100% - 2rem); /* Modal takes most of the screen width with margin */
+  }
+}
+
+@media (max-width: 480px) {
+  .px-4 {
+    padding: 0.5rem; /* Adjust padding */
+  }
+
+  .text-7xl {
+    font-size: 2.5rem; /* Further reduce heading size for smaller screens */
+  }
+
+  .text-xl {
+    font-size: 0.9rem; /* Adjust body text size */
+  }
+
+  .gap-6 {
+    gap: 0.5rem; /* Reduce space further */
+  }
 }
 </style>

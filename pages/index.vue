@@ -16,19 +16,19 @@
       />
 
       <!-- Content Area -->
-      <div class="flex flex-1 overflow-hidden">
+      <div class="flex flex-1 bg-black overflow-hidden justify-center items-center">
         <!-- Conditional Video Section -->
-        <div v-if="showVideo" class="flex-1 p-4 bg-white shadow-md rounded-lg">
+        <div v-if="showVideo" class="flex-1 p-4 bg-black shadow-md rounded-lg">
           <VideoGrid :roomId="String(roomId)" class="w-full h-full" />
         </div>
 
         <!-- Conditional Chat Section -->
-        <div v-if="showChat" class="flex-1 p-4 bg-gray-100 overflow-y-auto shadow-md rounded-lg">
+        <div v-if="showChat" class="flex-1 p-4 bg-gray-800 overflow-y-auto shadow-md rounded-lg">
           <Chat :roomId="String(roomId)" />
         </div>
 
         <!-- Conditional Drawing Pad Section -->
-        <div v-if="showCanvas" class="flex-1 p-4 bg-white shadow-md rounded-lg">
+        <div v-if="showCanvas" class="flex-1 p-4 bg-black shadow-md rounded-lg">
           <DrawingPad :roomId="String(roomId)" />
         </div>
       </div>
@@ -43,6 +43,7 @@
     </div>
   </div>
 </template>
+
 
 <script setup>
 import { ref, onMounted } from 'vue';

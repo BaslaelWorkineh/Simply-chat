@@ -3,7 +3,7 @@
     <!-- App Title -->
     <div class="text-lg font-space tracking-widest bg-clip-text text-transparent bg-gradient-to-r from-[#FF00FF] to-[#00FFFF]">
       <i class="fas fa-satellite-dish text-[#FF3366] mr-2"></i>
-      Daily Standup
+      Simply Chat
     </div>
 
     <!-- Display Room ID -->
@@ -72,16 +72,38 @@ button:hover {
 /* Mobile responsive adjustments */
 @media (max-width: 768px) {
   header {
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
+    flex-direction: column;
+    gap: 1rem;
     text-align: center;
   }
-  .text-lg {
-    margin-bottom: 1rem;
-    width: 100%;
+
+  /* Adjust title and room ID flex alignment */
+  .text-lg, .flex.items-center.text-sm {
+    flex-direction: row;
+    justify-content: center;
   }
-  .flex.space-x-4 {
-    width: 100%;
-    justify-content: space-evenly;
+
+  /* Show icons only on small screens */
+  button {
+    padding: 0.5rem;
+    font-size: 0.85rem;
+  }
+  button i {
+    display: inline;
+  }
+  button span {
+    display: none;
+  }
+
+  .text-lg {
+    font-size: 1rem;
+    margin-bottom: 0;
+  }
+
+  .flex.items-center {
+    flex-wrap: nowrap;
+    text-align: center;
   }
 }
 </style>
