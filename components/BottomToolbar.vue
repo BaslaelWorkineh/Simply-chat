@@ -1,9 +1,65 @@
 <template>
-    <footer class="flex justify-center items-center p-4 bg-gray-800 text-white fixed bottom-0 inset-x-0">
-      <button class="mx-2 px-4 py-2 bg-red-500 rounded">Leave</button>
-      <button class="mx-2 px-4 py-2 bg-gray-700 rounded">Mute</button>
-      <button class="mx-2 px-4 py-2 bg-gray-700 rounded">Stop Video</button>
-      <button class="mx-2 px-4 py-2 bg-gray-700 rounded">Share</button>
-    </footer>
-  </template>
-  
+  <footer class="flex justify-around items-center p-4 bg-gradient-to-r from-[#0A0F1C] via-[#1A1033] to-[#0A0F1C] text-white shadow-lg border-t border-[#FF3366] fixed bottom-0 inset-x-0">
+    <!-- Leave Button -->
+    <button
+      class="flex items-center gap-2 px-6 py-2 rounded-md text-sm bg-gradient-to-r from-[#FF3366] to-[#FF00FF] text-white hover:from-[#FF00FF] hover:to-[#FF3366] transform transition-all duration-300 shadow-lg hover:shadow-[#FF3366]/25 font-cyber">
+      <i class="fas fa-sign-out-alt"></i>
+      Leave
+    </button>
+
+    <!-- Mute Button -->
+    <button
+      class="flex items-center gap-2 px-6 py-2 rounded-md text-sm bg-gradient-to-r from-[#00FFFF] to-[#00FF66] text-white hover:from-[#00FF66] hover:to-[#00FFFF] transform transition-all duration-300 shadow-lg hover:shadow-[#00FFFF]/25 font-cyber">
+      <i class="fas fa-microphone-slash"></i>
+      Mute
+    </button>
+
+    <!-- Stop Video Button -->
+    <button
+      class="flex items-center gap-2 px-6 py-2 rounded-md text-sm bg-gradient-to-r from-[#6633FF] to-[#FF3366] text-white hover:from-[#FF3366] hover:to-[#6633FF] transform transition-all duration-300 shadow-lg hover:shadow-[#6633FF]/25 font-cyber">
+      <i class="fas fa-video-slash"></i>
+      Stop Video
+    </button>
+
+    <!-- Share Button -->
+    <button
+      class="flex items-center gap-2 px-6 py-2 rounded-md text-sm bg-gradient-to-r from-[#FFCC00] to-[#FF3366] text-white hover:from-[#FF3366] hover:to-[#FFCC00] transform transition-all duration-300 shadow-lg hover:shadow-[#FFCC00]/25 font-cyber">
+      <i class="fas fa-share-alt"></i>
+      Share
+    </button>
+  </footer>
+</template>
+
+<script setup>
+// No TypeScript imports needed here
+</script>
+
+<style scoped>
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Syncopate:wght@400;700&display=swap');
+
+/* Ensure Font Awesome is added globally; otherwise, include its CDN in index.html */
+.font-cyber {
+  font-family: 'Syncopate', sans-serif;
+  letter-spacing: 0.1em;
+}
+
+button {
+  transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
+}
+
+button:hover {
+  transform: translateY(-2px);
+}
+
+@media (max-width: 768px) {
+  footer {
+    flex-wrap: wrap;
+    text-align: center;
+  }
+  button {
+    margin: 0.5rem;
+    width: calc(50% - 1rem);
+  }
+}
+</style>

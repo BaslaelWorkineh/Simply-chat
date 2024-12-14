@@ -1,15 +1,40 @@
 <template>
-  <header class="flex justify-between items-center p-4 bg-white shadow-md border-b transition-all">
-    <div class="text-gray-800 font-semibold">Daily Standup Meeting</div>
+  <header class="flex justify-between items-center p-4 bg-gradient-to-r from-[#0A0F1C] via-[#1A1033] to-[#0A0F1C] text-white shadow-lg border-b border-[#FF3366] transition-all">
+    <!-- App Title -->
+    <div class="text-lg font-space tracking-widest bg-clip-text text-transparent bg-gradient-to-r from-[#FF00FF] to-[#00FFFF]">
+      <i class="fas fa-satellite-dish text-[#FF3366] mr-2"></i>
+      Daily Standup
+    </div>
 
-    <!-- Display the Room ID -->
-    <div class="text-gray-600">Room ID: <span class="font-semibold">{{ roomId }}</span></div>
+    <!-- Display Room ID -->
+    <div class="flex items-center text-sm font-cyber space-x-2 text-[#B4B4FF]">
+      <i class="fas fa-key"></i>
+      <span>Room ID:</span>
+      <span class="text-white font-semibold">{{ roomId }}</span>
+    </div>
 
     <!-- Toggle Buttons for Chat, Video, and Canvas -->
-    <div class="space-x-4">
-      <button @click="$emit('toggleChat')" class="px-4 py-2 rounded-md text-sm bg-blue-500 text-white hover:bg-blue-600 transition-all">Chat</button>
-      <button @click="$emit('toggleVideo')" class="px-4 py-2 rounded-md text-sm bg-green-500 text-white hover:bg-green-600 transition-all">Video</button>
-      <button @click="$emit('toggleCanvas')" class="px-4 py-2 rounded-md text-sm bg-purple-500 text-white hover:bg-purple-600 transition-all">Canvas</button>
+    <div class="flex space-x-4">
+      <button 
+        @click="$emit('toggleChat')"
+        class="flex items-center gap-2 px-4 py-2 rounded-md text-sm bg-gradient-to-r from-[#FF3366] to-[#FF00FF] text-white hover:from-[#FF00FF] hover:to-[#FF3366] transform transition-all duration-300 shadow-lg hover:shadow-[#FF3366]/25 font-cyber">
+        <i class="fas fa-comment-alt"></i>
+        Chat
+      </button>
+
+      <button 
+        @click="$emit('toggleVideo')"
+        class="flex items-center gap-2 px-4 py-2 rounded-md text-sm bg-gradient-to-r from-[#00FFFF] to-[#00FF66] text-white hover:from-[#00FF66] hover:to-[#00FFFF] transform transition-all duration-300 shadow-lg hover:shadow-[#00FFFF]/25 font-cyber">
+        <i class="fas fa-video"></i>
+        Video
+      </button>
+
+      <button 
+        @click="$emit('toggleCanvas')"
+        class="flex items-center gap-2 px-4 py-2 rounded-md text-sm bg-gradient-to-r from-[#6633FF] to-[#00FFFF] text-white hover:from-[#00FFFF] hover:to-[#6633FF] transform transition-all duration-300 shadow-lg hover:shadow-[#6633FF]/25 font-cyber">
+        <i class="fas fa-paint-brush"></i>
+        Canvas
+      </button>
     </div>
   </header>
 </template>
@@ -21,12 +46,42 @@ defineProps({
 </script>
 
 <style scoped>
-/* Add smooth transitions */
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css');
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Syncopate:wght@400;700&display=swap');
+
+/* Custom font classes */
+.font-space {
+  font-family: 'Space Grotesk', sans-serif;
+}
+
+.font-cyber {
+  font-family: 'Syncopate', sans-serif;
+  letter-spacing: 0.1em;
+}
+
+/* Hover animations */
 button {
-  transition: background-color 0.3s, transform 0.3s;
+  transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
 }
 
 button:hover {
   transform: translateY(-2px);
+}
+
+/* Mobile responsive adjustments */
+@media (max-width: 768px) {
+  header {
+    flex-wrap: wrap;
+    text-align: center;
+  }
+  .text-lg {
+    margin-bottom: 1rem;
+    width: 100%;
+  }
+  .flex.space-x-4 {
+    width: 100%;
+    justify-content: space-evenly;
+  }
 }
 </style>

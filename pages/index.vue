@@ -1,16 +1,9 @@
 <template>
   <div class="flex flex-col h-screen bg-gray-50">
-    <!-- Hero Section (Visible before the rest of the page) -->
-    <div v-if="showHero" class="flex justify-center items-center flex-col bg-blue-600 h-screen text-white text-center p-6">
-      <h1 class="text-4xl font-bold mb-4">Welcome to Our Meeting Platform</h1>
-      <p class="text-lg mb-6">Join, host, and collaborate easily with our innovative online meeting tool</p>
-
-      <!-- Action Buttons -->
-      <div class="space-x-4">
-        <button @click="joinMeeting" class="px-6 py-2 bg-green-500 rounded-lg text-white hover:bg-green-600 transition-all">Join</button>
-        <button @click="hostMeeting" class="px-6 py-2 bg-purple-500 rounded-lg text-white hover:bg-purple-600 transition-all">Host</button>
-      </div>
-    </div>
+    <!-- Hero Section -->
+    <HeroSection v-if="showHero" 
+                 @join="joinMeeting" 
+                 @host="hostMeeting" />
 
     <!-- Main Meeting Content (Initially hidden until hero section is skipped) -->
     <div v-if="!showHero">
@@ -54,6 +47,7 @@
 <script setup>
 import { ref, onMounted } from 'vue';
 import { useNuxtApp } from '#app'; // To access the socket instance globally
+import HeroSection from '~/components/HeroSection.vue';
 import Chat from '~/components/Chat.vue';
 import DrawingPad from '~/components/DrawingPad.vue';
 import MeetingHeader from '~/components/MeetingHeader.vue';
@@ -135,19 +129,3 @@ const generateRoomId = () => {
   return Math.floor(Math.random() * 1000000000);  // Random 9-digit number
 };
 </script>
-
-<style scoped>
-/* Hero Section Styling */
-h1 {
-  font-size: 3rem;
-  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
-}
-
-button {
-  transition: background-color 0.3s, transform 0.3s;
-}
-
-button:hover {
-  transform: translateY(-2px);
-}
-</style>
