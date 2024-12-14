@@ -57,7 +57,7 @@ import BottomToolbar from '~/components/BottomToolbar.vue';
 
 // Setup variables
 const roomId = ref(null);
-const showChat = ref(false);
+const showChat = ref(true);
 const showVideo = ref(false);
 const showCanvas = ref(false);
 const showHero = ref(true);
